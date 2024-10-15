@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value="application",proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value="application")
 public class ApplicationRequestCounter {
 	
 	private Integer Counter=0;
