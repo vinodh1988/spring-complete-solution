@@ -21,5 +21,9 @@
        }
        %>
    </ul>
+   
+   <h4>Number of times accessed in this session: <%=request.getAttribute("scounter") %></h4>
+   <h4>Number of times accessed in this application: <%=request.getAttribute("acounter") %></h4>
+   
 </body>
 </html>
