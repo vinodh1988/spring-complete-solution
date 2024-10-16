@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.springapps.entities.Project;
 import com.springapps.services.ProjectService;
@@ -25,11 +27,29 @@ public class ProjectController {
 
 	@Autowired 
 	private ProjectService pservice;
-	
+	/*
 	@GetMapping("")
 	public List<Project> getProjects() {
 		return pservice.getProjects();
-	}
+	}*/
+	
+	@GetMapping("")
+	public ResponseEntity<List<Project>> getProject(@RequestParam(required = false) Integer min,@RequestParam(required = false) Integer max) {
+		   try {
+			   if(min==null && max==null)
+				   return new ResponseEntity<>(pservice.getProjects(),HttpStatus.OK);
+			   else if(min==null)
+				   min=0;
+			   else if(max==null)
+				   max=Integer.MAX_VALUE;
+			  return new ResponseEntity<>(pservice.getProjects(min, max),HttpStatus.OK);	
+		   }
+		  
+		   catch(Exception e) {
+			   return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		   }
+		}
+	
 	
 	@GetMapping("/{projectno}")
 	public ResponseEntity<Object> getProject(@PathVariable Integer projectno) {

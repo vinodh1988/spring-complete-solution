@@ -27,6 +27,9 @@ public class ProjectService {
 		return prepo.findAll();
 	}
 	
+	public List<Project> getProjects(Integer min,Integer max) {
+		return prepo.readProjectsByTeamSize(min, max);
+	}
 	public Project getProject(Integer projectno) throws RecordNotFoundException {
 		
 		Project p=prepo.findByProjectno(projectno);
