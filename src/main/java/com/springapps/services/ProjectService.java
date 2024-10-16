@@ -43,4 +43,12 @@ public class ProjectService {
 			 prepo.save(project);//save method is used both update and insert
 		            //if primary key already exists it will be updated
 	}
+	
+	public void updateProject(Project project) throws RecordNotFoundExcepton {
+		Project p=prepo.findByProjectno(project.getProjectno());
+		if(p!=null)
+			return p;
+	    throw new RecordNotFoundException();
+	}
+	}
 }
