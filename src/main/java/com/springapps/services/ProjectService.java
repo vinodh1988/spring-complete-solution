@@ -44,11 +44,17 @@ public class ProjectService {
 		            //if primary key already exists it will be updated
 	}
 	
-	public void updateProject(Project project) throws RecordNotFoundExcepton {
-		Project p=prepo.findByProjectno(project.getProjectno());
+	public void updateProject(Integer projectno,Project project) throws RecordNotFoundException {
+		Project p=prepo.findByProjectno(projectno);
 		if(p!=null)
-			return p;
+		{
+			project.setProjectno(projectno);
+			project.setName(project.getName()==null?p.getName():project.getName());
+			project.setTechnology(project.getTechnology()==null?p.getTechnology():project.getTechnology());
+			project.setTeamsize(project.getTeamsize()==null?p.getTeamsize():project.getTeamsize());
+			prepo.save(project);
+		}
 	    throw new RecordNotFoundException();
 	}
-	}
+	
 }
