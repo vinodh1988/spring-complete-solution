@@ -67,7 +67,7 @@ public class ProjectController {
 	public ResponseEntity<String> updateProject(@PathVariable Integer projectno,@RequestBody Project project) {
 		try {
 			pservice.updateProject(projectno,project);
-			return new ResponseEntity<String>("updated the record ",HttpStatus.CREATED);
+			return new ResponseEntity<String>("updated the record ",HttpStatus.OK);
 		}
 		catch(RecordNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -83,7 +83,7 @@ public class ProjectController {
 	public ResponseEntity<String> deleteProject(@PathVariable Integer projectno) {
 		try {
 			pservice.deleteProject(projectno);
-			return new ResponseEntity<String>("Deleted the record ",HttpStatus.CREATED);
+			return new ResponseEntity<String>("Deleted the record ",HttpStatus.OK);
 		}
 		catch(RecordNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
