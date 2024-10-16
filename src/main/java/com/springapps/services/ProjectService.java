@@ -46,6 +46,7 @@ public class ProjectService {
 	
 	public void updateProject(Integer projectno,Project project) throws RecordNotFoundException {
 		Project p=prepo.findByProjectno(projectno);
+		System.out.println(p);
 		if(p!=null)
 		{
 			project.setProjectno(projectno);
@@ -53,6 +54,7 @@ public class ProjectService {
 			project.setTechnology(project.getTechnology()==null?p.getTechnology():project.getTechnology());
 			project.setTeamsize(project.getTeamsize()==null?p.getTeamsize():project.getTeamsize());
 			prepo.save(project);
+			return;
 		}
 	    throw new RecordNotFoundException();
 	}
