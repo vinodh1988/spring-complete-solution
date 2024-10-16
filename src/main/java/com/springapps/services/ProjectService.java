@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.springapps.entities.Project;
 import com.springapps.repositories.ProjectRepository;
+import com.springapps.utilities.RecordAlreadyExistsException;
 
 import jakarta.annotation.PostConstruct;
 
@@ -23,5 +24,14 @@ public class ProjectService {
 	
 	public List<Project> getProjects() {
 		return prepo.findAll();
+	}
+	
+	public void addProject(Project project) throws RecordAlreadyExistsException {
+		 Project p = prepo.findByProjectno(project.getProjectno());
+		 if(p!=null)
+			 throw new RecordAlreadyExistsException();
+		 else
+			 prepo.save(project);//save method is used both update and insert
+		            //if primary key already exists it will be updated
 	}
 }
