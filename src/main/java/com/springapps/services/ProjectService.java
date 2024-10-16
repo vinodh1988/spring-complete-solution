@@ -59,4 +59,15 @@ public class ProjectService {
 	    throw new RecordNotFoundException();
 	}
 	
+	public void deleteProject(Integer projectno) throws RecordNotFoundException {
+		Project p=prepo.findByProjectno(projectno);
+		System.out.println(p);
+		if(p!=null)
+		{
+			prepo.delete(p);
+			return;
+		}
+	    throw new RecordNotFoundException();
+	}
+	
 }

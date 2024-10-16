@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +68,22 @@ public class ProjectController {
 		try {
 			pservice.updateProject(projectno,project);
 			return new ResponseEntity<String>("updated the record ",HttpStatus.CREATED);
+		}
+		catch(RecordNotFoundException e) {
+			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	@DeleteMapping(value="/{projectno}")
+	public ResponseEntity<String> deleteProject(@PathVariable Integer projectno) {
+		try {
+			pservice.deleteProject(projectno);
+			return new ResponseEntity<String>("Deleted the record ",HttpStatus.CREATED);
 		}
 		catch(RecordNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
