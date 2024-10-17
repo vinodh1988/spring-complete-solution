@@ -5,3 +5,20 @@ insert into event(eventno,eventname,cause,applicationno) values(1,'Illegal Argum
 insert into event(eventno,eventname,cause,applicationno) values(2,'Null pointer Exception', 'Function attempeted to call using null object',1);
 insert into event(eventno,eventname,cause,applicationno) values(3,'SQL Error', 'DB Connection Cannot be established',2);
 insert into event(eventno,eventname,cause,applicationno) values(4,'Table Not Found', 'SQL Query not working',2);
+
+{
+        "applicationno": 3,
+        "appname": "Azure Application",
+        "events": [
+            {
+                "eventno": 5,
+                "eventname": "Service not Paid",
+                "cause": "Payment related issues"
+            },
+            {
+                "eventno": 6,
+                "eventname": "Daily limit exceeded",
+                "cause": "Too many requests made for the day"
+            }
+        ]
+    }
