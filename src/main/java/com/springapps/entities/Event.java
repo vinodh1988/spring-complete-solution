@@ -1,5 +1,7 @@
 package com.springapps.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +24,7 @@ public class Event {
 //one event is associated utmost one application
 @ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name="applicationno")
+@JsonIgnore //to avoid cyclic reference in json
    private Application application;//application has applicationno
 
 public Event() {}
@@ -31,28 +34,28 @@ public Event(Integer eventno, String eventname, String cause) {
 	this.eventname = eventname;
 	this.cause = cause;
 }
-Integer getEventno() {
+public Integer getEventno() {
 	return eventno;
 }
-void setEventno(Integer eventno) {
+public void setEventno(Integer eventno) {
 	this.eventno = eventno;
 }
-String getEventname() {
+public String getEventname() {
 	return eventname;
 }
-void setEventname(String eventname) {
+public void setEventname(String eventname) {
 	this.eventname = eventname;
 }
-String getCause() {
+public String getCause() {
 	return cause;
 }
-void setCause(String cause) {
+public void setCause(String cause) {
 	this.cause = cause;
 }
-Application getApplication() {
+public Application getApplication() {
 	return application;
 }
-void setApplication(Application application) {
+public void setApplication(Application application) {
 	this.application = application;
 }
   

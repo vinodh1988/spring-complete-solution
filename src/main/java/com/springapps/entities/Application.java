@@ -26,22 +26,22 @@ public class Application {
 		this.applicationno = applicationno;
 		this.appname = appname;
 	}
-	Integer getApplicationno() {
+	public Integer getApplicationno() {
 		return applicationno;
 	}
-	void setApplicationno(Integer applicationno) {
+	public void setApplicationno(Integer applicationno) {
 		this.applicationno = applicationno;
 	}
-	String getAppname() {
+	public String getAppname() {
 		return appname;
 	}
-	void setAppname(String appname) {
+	public void setAppname(String appname) {
 		this.appname = appname;
 	}
-	Set<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return events;
 	}
-	void setEvents(Set<Event> events) {
+	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
     
