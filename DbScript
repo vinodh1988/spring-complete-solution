@@ -1,0 +1,7 @@
+insert into applications values(1,'SPA Angular');
+insert into applications values(2,'Pro API');
+
+insert into event(eventno,eventname,cause,applicationno) values(1,'Illegal Argument Error', 'Wrong parameter passed',1);
+insert into event(eventno,eventname,cause,applicationno) values(2,'Null pointer Exception', 'Function attempeted to call using null object',1);
+insert into event(eventno,eventname,cause,applicationno) values(3,'SQL Error', 'DB Connection Cannot be established',2);
+insert into event(eventno,eventname,cause,applicationno) values(4,'Table Not Found', 'SQL Query not working',2);
