@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springapps.entities.Computer;
 import com.springapps.services.DataService;
 
-@RestController
+
 @RequestMapping("/api/common")
 public class CommonAPI {
 

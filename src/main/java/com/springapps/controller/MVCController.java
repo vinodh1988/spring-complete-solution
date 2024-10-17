@@ -9,8 +9,11 @@ import com.springapps.services.DataService;
 import com.springapps.utilities.ApplicationRequestCounter;
 import com.springapps.utilities.RequestCounter;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @Controller
 @RequestMapping("/web")
+@Tag(name = "Project List API", description="All the operations of project entity")
 public class MVCController {
 
 	@Autowired

@@ -21,8 +21,14 @@ import com.springapps.services.ProjectService;
 import com.springapps.utilities.RecordAlreadyExistsException;
 import com.springapps.utilities.RecordNotFoundException;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/projects")
+@Tag(name = "Project List API", description="All the operations of project entity")
 public class ProjectController {
 
 	@Autowired 
@@ -32,6 +38,7 @@ public class ProjectController {
 	public List<Project> getProjects() {
 		return pservice.getProjects();
 	}*/
+	
 	
 	@GetMapping("")
 	public ResponseEntity<List<Project>> getProject(@RequestParam(required = false) Integer min,@RequestParam(required = false) Integer max) {
@@ -51,6 +58,17 @@ public class ProjectController {
 		}
 	
 	
+	@Operation(
+			   summary="Get Project by project no",
+			   description="Get Product by passing project number "
+			)
+			@ApiResponses(
+				 value = {
+						 @ApiResponse(responseCode="200", description="Project is found"),
+						 @ApiResponse(responseCode="400", description="if No Project exists with the id"),
+						 @ApiResponse(responseCode="500", description="Server related error")
+				 }	
+				)
 	@GetMapping("/{projectno}")
 	public ResponseEntity<Object> getProject(@PathVariable Integer projectno) throws Exception {
 	
