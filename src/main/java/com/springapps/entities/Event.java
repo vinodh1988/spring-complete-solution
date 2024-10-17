@@ -1,8 +1,11 @@
 package com.springapps.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +17,12 @@ public class Event {
    private String eventname;
 @Column 
    private String  cause;
+
+//many events might belong to one application
+//one event is associated utmost one application
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name="applicationno")
+   private Application application;//application has applicationno
 
 public Event() {}
 public Event(Integer eventno, String eventname, String cause) {
@@ -39,6 +48,12 @@ String getCause() {
 }
 void setCause(String cause) {
 	this.cause = cause;
+}
+Application getApplication() {
+	return application;
+}
+void setApplication(Application application) {
+	this.application = application;
 }
   
 

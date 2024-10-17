@@ -1,8 +1,12 @@
 package com.springapps.entities;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,6 +16,9 @@ public class Application {
     private Integer applicationno;
     @Column
     private String appname;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "application")
+    private Set<Event> events;
     
     public Application() {}
 	public Application(Integer applicationno, String appname) {
@@ -31,6 +38,13 @@ public class Application {
 	void setAppname(String appname) {
 		this.appname = appname;
 	}
+	Set<Event> getEvents() {
+		return events;
+	}
+	void setEvents(Set<Event> events) {
+		this.events = events;
+	}
     
+	
     
 }
