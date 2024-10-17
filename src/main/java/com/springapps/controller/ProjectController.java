@@ -52,34 +52,19 @@ public class ProjectController {
 	
 	
 	@GetMapping("/{projectno}")
-	public ResponseEntity<Object> getProject(@PathVariable Integer projectno) {
-	 try {
+	public ResponseEntity<Object> getProject(@PathVariable Integer projectno) throws Exception {
+	
 		return new ResponseEntity<>(pservice.getProject(projectno),HttpStatus.OK);
-	 }
-	 catch(RecordNotFoundException e) {
-		 return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
-	 }
-	 
-	 catch(Exception e)
-		{
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	
 	 
 	}
 	//RequestBody would parse json and convert to object
 	@PostMapping("")
-	public ResponseEntity<String> addProject(@RequestBody Project project) {
-		try {
+	public ResponseEntity<String> addProject(@RequestBody Project project) throws Exception {
+
 			pservice.addProject(project);
 			return new ResponseEntity<String>("Added the record ",HttpStatus.CREATED);
-		}
-		catch(RecordAlreadyExistsException e) {
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
-		}
-		catch(Exception e)
-		{
-			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		
 		
 	}
 	
