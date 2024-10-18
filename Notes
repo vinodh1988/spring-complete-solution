@@ -942,4 +942,66 @@ Security implementation
 						  
 				2. Token Based Security
 				
-				    JWT Tokens 
+				    JWT Tokens
+				    
+
+
+OAuth Specification
+
+
+ What are you securing?
+ 
+                Resource ------> (Endpoint)
+				
+
+Who provides this resource 
+
+
+    [  1. A Server
+	      2. A Web service deployed in the server (REST)
+		     3. The implementation of the requested Endpoint] -----------> Resource Server
+			 
+
+Who needs the Resource?
+
+     User? -----------> Resource Owner
+	 
+	 Service, application -------->Client
+	 
+	 Device -----> Device
+	 
+	 
+User, Client, device can get the resource from the resource server
+but resource server will provide the resource if and only if the above things has
+a valid Token (Identity /Access card)
+
+
+
+Authorization Server
+--------------------
+           Which validates the identity of user, client, device
+		   if valide provides a token(accesstoken (24hrs),RefreshToken(72hrS)
+		   
+		  Token?(Ways to verify and grant token -- Grant Type
+		          1.username/password (user)
+				  2. Client credentials 
+				  3. Device code
+				  4. Refresh Token
+		   
+if you carry token resource server will validates
+
+	 
+
+         Web Service 1---------> Web SErvice 2
+		   (details about the webservice1 - client)
+		   
+		
+user ----> (Application)------------> Webservice
+            ( Application details ------->Client details , user---> user details )
+ 
+ 
+           (device)---->Appication----------> Webservice
+		   
+		   (application details -client details, device code -device details)
+		   
+ 
