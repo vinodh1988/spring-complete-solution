@@ -10,8 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.firstspring.entities.User;
-import com.firstspring.repositories.UserRepository;
+import com.springapps.entities.User;
+import com.springapps.repositories.UserRepository;
+
 
 @Service
 public class UserService implements UserDetailsService {
