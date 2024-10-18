@@ -1,0 +1,945 @@
+
+Spring boot
+    
+	Technology ?
+	
+	          Console based application
+			  Desktop Applications
+			  
+			  Web services (SOAP,REST)
+			  
+			  Web applications
+			  
+			  Messaging Services
+			  
+			  Background Jobs (Running)
+			  
+			  Scheduled Jobs (Runs sheduled)
+			  
+			  Cloud Based Applications
+			  
+			  Cloud based Services
+			  
+			  Security Related Services
+			  
+			  Network Related Services
+			  
+			  
+	Agenda
+	         Spring Framework
+			 
+			 Spring Core
+			 
+			 Spring boot essentials
+			 
+			n
+	
+	         Rest API  - Spring boot
+			  
+			             What is Rest API
+						 Development best practices
+						 Exception and error handling techniques
+						 Handling Database connections
+						 ORM (object relational mapping)
+						 Secure the REST APIs
+						 Document the resT apis
+						 
+						 Packaging and deploying the spring boot  applications
+						 How to observe/monitor the application/services
+						 
+						 What is microservice
+						 Spring boot and microservice
+						 
+						 
+						 
+			Containerization
+			           how to containerize applications
+					   how to deploy containers
+					   
+					   what is docker platform and breif about kubernetes platform
+			  
+			  
+Spring boot
+   
+    -----------> ( manages ,starts and runs Spring based application)
+	
+	
+	Spring boot runs Spring based (spring framework ) applications/services
+	
+	
+	
+Spring Framework
+-----------------
+
+
+    Spring Core ?
+	
+	          Inversion Of Control
+			  
+			  
+
+Library
+------------
+package com.libx;
+class Feature {
+   public void activityX() {
+   
+     //logic
+   }
+} //deprecated and marked for removal
+//some months later
+
+class FeatureX {
+   public void activityX() {
+   
+      //logic
+   }
+}
+
+Application
+-------------
+import com.libx.*;
+
+// this application needs activityX
+class EntryPoint{
+         public static void main(String[] n) {
+		  //code
+		  Feature x=new Feature();
+		  x.activityX(); //so you are able use activityX
+		 
+		 }
+}//if Feature class is removed in libx Entrypoint will not work any more
+ //Feature reference is created and object is also created
+ //in this approach developer decided the flow of the application and code execution
+ // Entrypoint gets affected if Featurx is modified (this is called dependency)
+ //association can be there but dependency is not good for health of application (does not
+ support modification)
+ 
+ 
+ 
+
+Library
+------------
+package com.libx;
+interface Activity {
+   public void activityX();
+}
+class Feature implements Activity {
+   public void activityX() {
+   
+     //logic
+   }
+} //deprecated and marked for removal
+//some months later
+//New Version
+class FeatureX {
+   public void activityX() {
+   
+      //logic
+   }
+}
+
+Framework ( Spring Core- IOC+ DI)
+-----------
+
+FactoryClass----> ( ObjectProvider)
+
+       xfeature --------> FeatureX             //[Feature(remove)]
+	   ýfeature --------> YClass
+	   zfeature ---------> ZClass
+
+Application
+-------------
+import com.libx.*;
+
+// this application needs activityX
+class EntryPoint{
+         public static void main(String[] n) {
+		  //code
+		  //Feature x=new Feature();
+		  Activity x = ObjectProvider.getObject("xfeature"); //ObjectProvider will give right object
+		  x.activityX(); //so you are able use activityX
+		 
+		 }
+}
+//in this cass dependency is not established by the developer
+// dependency is injected dynamically by framework during runtime according to the needs
+// changes in the class implementation will not affect class which is using the object
+// this process is called inversion of control
+// this is achieved with a technique called dependency injection
+
+
+A system free of dependencies is called loosely coupled systemnn
+
+
+Spring Framework 
+
+ IOC + Dependency Injection
+ 
+                       1. Configuration over Convention
+					            
+								Approach
+								
+								XML Based configuration
+								
+								<bean id="featurex" class="com.appx.Feature"></bean>
+								
+								
+					    2. Convention over Configuration
+						
+						       Rather using configuration , if the 
+							   developer follows some conventions
+							   the runtime and spring core can automatically understand
+							   what beans to be injected for a given scenario
+							   
+							   Convention?
+							   
+							     usage of annotations and  Package naming techniques, 
+								 reference variable naming techiques 
+								 
+								 a. Annotations and XML configuration
+		----------------------------------------------------------------------------------------
+		
+							
+							b. Annotation and Java Configuration
+								 
+								 
+					   
+					   
+					   
+	1. Spring boot runs spring based application ( Spring core is the heart of spring framework)
+	2. Spring boot supports only Java config and annotation approach (No XML configuration at all)
+	
+
+
+Spring Framework
+
+ Spring Core
+ 
+          IOC+DI  (          collection of  java classes (BEAN)  )
+		  
+		  
+
+
+  Spring core to manage IOC has two important interfaces and their implementation
+  the two interfaces are called IOC Containers
+  
+  1. Bean Factory ( the implementation of this interface takes care of bean life cycle)
+  
+               it focuses Bean Life cycle(scope, state, creation,destruction)
+			   
+			   it focuses on classes in the spring application and its instantiation and
+			   maintaining the state of the objects
+			   
+  2. Appication Context ( the implementations of this interface takes care of the
+     the application)
+  
+              if focuses on the entire group of objects and their states
+			  
+			  logical wrapper of all the beans thats are intantiated
+			  
+			 n  ( application intialization
+			  , application context intialization, preprocessing logics, post processing logics)
+			  
+			  
+	Spring boot
+	-------------
+	
+	 we dont need to create an any application context,
+	 
+	 there is  context already established
+	 
+	 
+	 Non spring boot applictions
+	 -------------------------
+	 
+	 We should take the responsibility of crating application Context and beanfactory
+	 
+	 
+
+Spring boot
+
+                1. Spring boot runs Spring based Applications
+				2. Zero XML Configuration 
+				3. Spring boot applications/services are Stand alone 
+				 ( No need to deploy on application servers(tomcat/jboss/weblogic/glassfish))
+				 ( spring boot supports libraries that listens
+				 to the requests it supports tomcat,  Tomcat, Jetty or Undertow directly)
+				
+				4. Spring boot is opinionated ( makes development and configuration easier)
+				5. Supports application monitoring and observability
+				
+				
+				
+				expressing or having extremely strong opinions about things 
+				that you are not willing to change
+				
+				Based on the dependencies you use 
+				for the applications/services
+		        spring boot assumes that you are
+				goint to doing the application 
+				for a particular purpose
+				
+				it expects the developer the come
+				up with conventions and configurations
+				that it expects and the developer must
+				be abide to it for smooth function
+				
+				this saves lots of code and time consumed by the developer
+				and makes things simpler
+				
+				It automates various activities by providing starter
+				dependencies
+				
+				
+				Spring boot specifies
+				that its applications must be created
+				either using gradle/maven
+				
+Maven?
+
+         Project Management utility
+		 
+		 Project Management ()
+		              
+					  1. Project Details
+					  2. Project relationship(Parent project, dependent project)
+					  2. Version 
+					  3. Platform Details (JAva version, packaging format)
+					  4. Dependency Managed
+					  5. Test Configuration and Running Testing
+					  6. Compilation, build and packaging
+					  7. Documentation
+					  8. Deployment and repository management
+					  
+		Maven does all the above activities
+		
+		it manages this by maintaining the details in a file called n
+		
+		
+		
+Solution ------>  erp-solution (Group) -------> com.erpsolution
+							1. erp-api (artifact)
+							2. erp-app (Artifact)
+							3. erp-mail-service(artifact)
+							4. erp-message-service(artificat)
+							
+				all the maven activities like building compiling
+				packaging testing documenting
+				
+				is done with help of plugins
+				
+				plugins in maven categorized in two types
+				
+				1. Build plugins ( compile, build,package)
+				2. Reporting plugins( documenting, reportsn)
+
+
+I
+Older ways
+
+
+     1. XML Configuration
+    2. XML + annotation
+IOC + DI in spring boot
+
+      
+		 
+		 Actual way in spring boot: java+annotations
+		 
+		 Annotations
+		 
+		         Technique called Autowiring 
+				 
+		
+		If you need to inject an object use an annotation called @Autowired
+		
+		
+		@Autowired
+		Sample info;
+		
+		// Sample is an interface info is a reference
+		
+		Application Context will search for all the implementations
+		of Sample in all the Scannable(?) packages
+		and if it finds appropriate implementation  it would
+		inject the instance to the reference
+		
+		The application context would find the classes
+		if and only if  the classes are either stereotyped
+		or configuration
+		
+		
+		@Configuration
+		class X {
+		}
+		
+		Stereotyping:
+		      Specifying the nature of the class using annotations
+			  
+			  @Controller
+			        if a class is a controller class in MVC
+			  @Component
+			         if a class is normal bean class yet it has to be autowired
+			  @Service
+			         if a class is providing service it can be stereotyped as Service
+			  @Repository
+			         if a class is data oriented classed (like DAO)
+					 
+					 
+	Configuration and stereotyped classes
+	if scope not mentioned explicitly
+	are instantiated automatically
+	and will be available as singleton object
+	
+
+
+Application Context instantiates all the stereotyped and  Configuration classes
+while setting up application context
+
+
+while instantiating a bean 
+
+n
+
+a
+
+
+Scope of a bean is
+
+  Singleton
+  Prototype
+  Request
+  application
+  sessionn
+  
+  
+
+Web application
+
+
+           View +  (Business login --------> (Model))
+		   
+		   
+		   
+		   
+	request (browser -http)  ------------->  (        Request is processed
+	                                                  business logic is executed
+													  Server side UI template (JSP,Thymeleaf, Velocity\
+											          ,velocity)
+													  is rendered
+													  (Html+css+js) is generated
+				(repsonse)				<-----------
+				
+		
+		Model -----> ( Class and interfaces that represents your system)
+		
+		Controller ------> (Application flow and business logic)
+		
+		View ------> (presentation logic, input and output)
+		
+Spring nn
+-------------------------------------------------------------------------
+
+Modern Approach
+ ---------------
+ 
+ UI application (web)
+ --------------
+                Angular
+				React
+				Vue Js 
+				
+				         single page application (Front end application
+						 
+ Mobile
+				Android Application
+				
+				IOS application
+				
+Android TV
+						 
+	-----------------------------------------------------------------------
+	
+	Backend service
+	
+	               Exposes the data in the form or REST APIs and UI app consumes it
+				   
+				   Spring boot - 'Spring boot rest api
+				   
+
+
+
+
+Spring MVC  - Front controller Design Pattern
+
+               Request (url)
+(browser)  -------------------------------->
+                                               ( DispatcherServlet)
+											   
+											           ----> 1. Resolves the url and tries
+													    to identify the controller mapped to url
+														pattern ( conventions should be followed
+														in code for the mapping)
+														
+														---->2. invokes appropriate method
+														associated with request
+														
+														----->3. Method in the controller
+														runs , it packs the model
+														and returns a string(view name)
+														
+														----->4. Dispatcher servlet
+														recieves the view name and try to resolve
+														the  view page (using view resolver)
+														
+														-----> 5. view  is identified and renderes
+														
+														----->6. create html is responded to the
+														browser
+														
+														
+
+
+class MVController -------> singleton
+
+Autowired    -> requestCounter -----> session
+                       (for every session a seperate object is created
+					   
+					   
+					   
+					   ProxyObject-------> (s1,s2,s3,s4)->(requestObject
+					   
+
+Session?
+
+ MVCController singleton -> (one object)
+ 
+               Autowired 
+			   
+			    RequestCounter(sessionScoped)  session;
+				
+				ApplicationRequestCounter(applicationScoped) application;
+				
+				
+		(ProxyObjectRefererenc)	<- (s1,s2,s3,s4,s5)
+				
+		(ProxyObjectReference)<-		(app1)
+		
+
+
+REST - Representation State Transfer
+
+ URL - http://servername:8080/resourcepath
+ 
+ resourcepath
+			endpoint
+			resource
+			path
+			urlpattern
+			
+ You can specify what action to be taken by server by using http method
+ 
+ GET  - Read
+ POST - Write (Create)
+ DELETE - delete
+ PUT - full update/replace 
+ PATCH - partial update/replace
+ 
+ OPTION
+ HEAD
+ CONNECT
+ TRACE
+ 
+ 
+ 
+ 
+(client) ------------>     (Http Request)
+                 --> Http Message
+                        Resource (URL)
+						Http Headers
+						        Many key value pairs
+								Content-Type: application/json
+								Accept: application/json
+								Authorization: Bearer efjadfdfdfdfdddddddddddd
+								User-Agent: .........
+								
+						Http Body
+						      {
+							   
+							  }
+
+                       (server)
+					   
+					   Will have for give url pattern/path/resource
+					   
+					   will have implementations for various actions (GET,POST, PUT.....)
+					   
+					   if the  resource has appropriate implementations
+					   
+					   server would run the action and return
+					   appropriate response
+					   
+					   response ----> Http response MEssage
+					   
+					   Response header (key,values)
+					   Response body (data)
+
+
+ HTTP 
+ 
+ REST -- representation state transfer
+ 
+  MEdia Types
+  
+        json
+		xml
+		text
+		binary
+		pdf
+		doc
+		xls
+		jpeg
+		png
+ 
+ 
+ Response status
+ 
+             1xx --informational message
+			 
+			 2xx -- Success messages
+			 
+			 3xx -- Redirectional message( if requested resource is moved or redirected to somewhere else)
+			 
+			 4xx -- lclient error (request itself has issues)
+			 
+			 5xx - server error( if server not able to process)
+			 
+
+
+Request
+       HTTP VERB
+				get
+				post
+				put
+				patch
+				delete
+				
+		reqeust header
+		request body ( post,put,patch)
+		
+response
+
+	  response status
+	            1xx
+				2xx
+				3xx
+				4xx
+				5xx
+	  http body
+	  response headers
+	  
+Media types that are supported in REST
+
+			 
+
+
+Rest controller
+ 
+     url pattern ------> ( method) -> returns string/any list/any data
+	 
+	         the data is returned to the client ( text/json/file)
+
+Controler
+
+       url pattern -----> (method) -> returns string/ModelAndView
+	                    the view resolver resolve the view by using view name
+						view is rendered
+						and html is sent to the client
+						
+
+
+JDBC - Java database connectity?
+
+                Coding completely in detail
+				need to SQL statements with in java to interact with databse
+				(if dbservice change sQL might need to be slighlty replaced accordingly)
+				Connection has to be created and managed by developer
+				(improper managment would lead db crash)
+				(techniques like connection pooling need to be implemented)
+				
+				transaction management and update/insert statements has
+				to be executed directly on the db level
+				there are chances for db crash if the db operations are too heavy
+				
+				
+
+1. usage of SQL
+2. Connection management
+3. Transaction directly at database level 
+
+-------------------------------------------------------------
+
+Frameworks
+
+              ORM Framework - Object relational mapping
+			  
+			  1. Connection and sessions are managed by framework , you dont need
+			  to worry all you need to do is give (configuration)
+			  2. No need to write SQL , SQL generation is taken care by framework
+			  according to the current configured db service
+			  3. transaction are tackled at the app level but not at db level
+			  only if you commit  sql statements are genereted and executed
+			  
+			  
+    DeviceMonitor
+	
+	Record144      (recno,metricname,recvalue,time)           
+	
+	15 minutes ( the value changed for 250 times) --> the last value by end of 15 minutes
+	is what matters
+	
+	if you are handling the value
+	update at db level
+	you have to update the 
+	values 250 times by using update statements
+	
+	but in orm instead of putting it directly in db
+	
+	we use a class called DeviceMonirot we maintain object rec101--> (101,"ReadingX",1540,'12:20:30")
+	
+	
+	Game
+	
+	12.30
+	        name score
+	       john 163450
+		   
+		   score updated 1500 times
+    12.50
+	       john 253034
+		   
+		   
+		   Object relational mapping
+		   Table					class
+		GameScore					 GameScore
+		userid                       userid
+		name                          name 
+		score                        score
+		
+
+
+Spring Data JPA
+
+
+JPA - ORM library
+
+
+Data JPA??
+
+         Works similar to that of jpa
+		 
+		 1. configuration need to set for db
+		 2. Mapping needs to be done for classes to db tables
+		 3. No need to write even single line of code for any DB operations
+		 it will be taken care by data jpa itself (in hibernate and JPA we need to write
+		 code for db operations)
+		 
+		 
+		 
+	File based RDBMS
+	
+
+Stereotype-------> implementations (CLASS)
+
+
+interface projectrepsitory
+
+
+@Repository
+class ProjectRepo implement ProjectRepository
+{
+
+}
+
+
+http://localhost:8080/api/project?min=10&max=50
+
+api/project/addProject
+api/project/readProject
+api/project/updateProject
+
+
+Entities and relationship
+how to handle it in Data JPA
+how to post and get nest JSON
+
+
+How to generate documentation for API
+
+How to secure the API
+
+
+How to properly handle exceptions
+
+-----------------------
+
+Deployment
+Containerizationn
+
+
+
+If entities are related to each other
+
+based on the relation ship b/w the two tables in terms of rows 
+we can have three possible relationships
+
+1. one to one 
+2. one to many
+3. many to many
+
+
+one to one 
+----------
+
+          project
+		           project (projectid(pk),name,startdate, teamsize,technology)
+		  HardwareConfig
+		           (projectid(pk,fk), ram, cpu, disk, os)
+				   
+one to many
+--------------
+         Project
+		          project (projectid(pk),name,startdate,teamsize,technology)
+				  members( memberid(pk), firstname, role, experience, projectid(fk))
+				   
+				  Author(authorid(pk),name)
+				  books(bookid(pk),bookname,....,authorid(fk))
+				  
+				  1 author writes many books
+				  
+Many to Many
+-----------
+
+                Skills(skillid(pk),skillname) 
+				       1, Java
+					   2, Angular
+					   3, SQL
+			           4, Azure
+					   
+				 members( memberid(pk), firstname, role, experience, projectid(fk))
+				 
+			   one skill be by possessed by many members
+			   one member may have many skills
+			   
+			   
+			   skillmap
+			   (memberid(fk),skillid(fk))
+			   
+			   1     2
+			   1     3
+               2	 1
+               2     5
+               3     1
+               3     3			  
+               
+
+
+one to one
+one to many
+many to many
+
+hibernate and jpa
+
+
+   parent class
+   child class
+   
+   
+   one to many
+   one - parent
+   many -many
+   
+   
+   in all cases parent class will have  mappedby property in the annotation
+   in child class we use foreignkey column specs(ie.., joinColumn)
+   
+ 
+
+Cascade?
+
+         Use  Application for the flow?
+		 or Event for the flow?
+		 
+		 if Application?
+		 
+		  Create repo for Application
+		  
+		  
+		  
+		  Event-------> (Application)
+		  
+		  Application --> (Set Event)
+		  
+
+
+applicatioin 
+
+           applicationno
+		   appicationname
+		   events
+		   
+		   epplicationno:1
+		   applicationname: SPA
+		   events : [
+		       {
+			     "eventno": 1,
+				 "eventname": "somevalue"
+				 "cause":"some value
+				 //"application": {
+				           epplicationno:1
+		                   applicationname: SPA
+						   events : [.....]
+					}
+			   }
+		   ]
+		   
+
+
+Trace, observe and monitor
+
+      1. number of requests
+	  2. Latency
+	  3. JvM memory
+	  4. garbage collector
+	  5. Beans  info
+	  7. Storage information
+	  8. Threads
+	  ...
+	  ...
+	  ...
+	  
+	  
+	  actuator
+	
+	
+	
+
+Security implementation
+               
+			   
+			   1. Basic Security
+			   
+			              Username & password need to be passed using
+						  Authorization header
+						  
+						  
+				          to store usernames & password
+						  
+						  1. memory (directly in memory)
+						  2. Database (JDBC)
+						  3. LDAP (directory service to store info)
+						  
+				2. Token Based Security
+				
+				    JWT Tokens 
